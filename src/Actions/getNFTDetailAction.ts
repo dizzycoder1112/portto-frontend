@@ -1,10 +1,12 @@
 type NFTDetailDTO = {
-  contract_address: string;
-  token_id: string;
+  contractAddress: string | undefined;
+  tokenId: string | undefined;
 };
 async function getNFTDetail(data: NFTDetailDTO): Promise<any> {
+  if (data.contractAddress === undefined || data.tokenId === undefined)
+    throw Error('params is uncorrect');
   const url = new URL(
-    `https://api.opensea.io/api/v1/assets/${data.contract_address}/${data.token_id}`
+    `https://api.opensea.io/api/v1/asset/${data.contractAddress}/${data.tokenId}`
   );
   try {
     const response = await fetch(url);

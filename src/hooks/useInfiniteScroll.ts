@@ -2,8 +2,12 @@ import { useState, useEffect } from 'react';
 
 const useInfiniteScroll = (
   callback: _.DebouncedFunc<() => Promise<void>>
-): readonly [boolean, React.Dispatch<React.SetStateAction<boolean>>] => {
+): [boolean, (isFetching: boolean) => void] => {
   const [isFetching, setIsFetching] = useState<boolean>(false);
+
+  const handleIsFetching = (isFetching: boolean): void => {
+    setIsFetching(isFetching);
+  };
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -23,7 +27,7 @@ const useInfiniteScroll = (
     setIsFetching(true);
   }
 
-  return [isFetching, setIsFetching] as const;
+  return [isFetching, handleIsFetching];
 };
 
 export default useInfiniteScroll;
