@@ -31,7 +31,7 @@ function Root(): JSX.Element {
         setIsFetching(false);
       }
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }, 1000);
   const [isFetching, setIsFetching] = useInfiniteScroll(fetchData);

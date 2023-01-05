@@ -21,10 +21,9 @@ function NFTDetail(): JSX.Element {
       const data = await getNFTDetail({ contractAddress, tokenId });
       if (data !== undefined) {
         setNFT(data);
-        console.log(data);
       }
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 
@@ -42,7 +41,7 @@ function NFTDetail(): JSX.Element {
       <div>
         <BackBtnWrapper>
           <span onClick={() => navigate(-1)}>
-            <img src={process.env.PUBLIC_URL + '/left_arrow.svg'} />
+            <img src={String(process.env.PUBLIC_URL) + '/left_arrow.svg'} />
           </span>
         </BackBtnWrapper>
         <h3>{NFT?.collection.name}</h3>
